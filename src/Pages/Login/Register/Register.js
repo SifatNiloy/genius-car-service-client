@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Register.css'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
+    const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword,
         user,
@@ -24,7 +25,10 @@ const Register = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        createUserWithEmailAndPassword(email, password);
+        const agree = event.target.terms.checked;
+        if (agree) {
+            createUserWithEmailAndPassword(email, password);
+        }
     }
 
     return (
@@ -34,7 +38,9 @@ const Register = () => {
                 <input type="text" name="name" id="" placeholder='your name' />
                 <input type="email" name="email" id="" placeholder='your email' required />
                 <input type="password" name="password" id="" placeholder='your password' required />
-                <input type="submit" value="Register" />
+                <input onClick={() => setAgree(!agree)} className='me-2 mb-3' type="checkbox" name="terms" id="terms" />
+                <label className={agree ? 'opacity-100' : 'opacity-50'} htmlFor="terms">Accept Genius Car terms and condition</label>
+                <input className='w-50 mx-auto btn btn-primary' type="submit" value="Register" />
             </form>
             <p>Already have an account? <Link to='/login' className='text-danger pe-auto text-decoration-none' onClick={navigateLogin}>please Login</Link></p>
             <SocialLogin></SocialLogin>
