@@ -19,8 +19,8 @@ const Banner = () => {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p></p>
+                    <h3>Save money on fuel</h3>
+
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -31,8 +31,8 @@ const Banner = () => {
                 />
 
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p></p>
+                    <h3>Repair from expert</h3>
+
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -43,8 +43,8 @@ const Banner = () => {
                 />
 
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>   </p>
+                    <h3>Pay now, save later</h3>
+
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
