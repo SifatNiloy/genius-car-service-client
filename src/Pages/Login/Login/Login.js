@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import useToken from '../../../hooks/useToken';
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
@@ -25,6 +26,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(user);
     if (error) {
         errorElement = <p className='text-danger'>Error: {error?.message}</p>
 
@@ -32,17 +34,16 @@ const Login = () => {
     if (loading || sending) {
         return <Loading></Loading>
     }
-    // if (user) {
-    //     // navigate(from, { replace: true });
-    // }
+    if (token) {
+        navigate(from, { replace: true });
+    }
     const handleSubmit = async event => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('http://localhost:5000/login', { email });
-        localStorage.setItem('accessToken', data.accessToken);
+
         navigate(from, { replace: true });
     }
     const navigateRegister = event => {
